@@ -6,10 +6,12 @@ class HYBottomBarItem extends BottomNavigationBarItem {
             icon: Image.asset(
               "assets/images/tabbar/${iconName}.png",
               width: 30,
+              gaplessPlayback: true,
             ),
             label: title,
             activeIcon: Image.asset(
               "assets/images/tabbar/${iconName}_fill.png",
               width: 30,
+              gaplessPlayback: true,
             ));
 }

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_learn/douban/model/home_model.dart';
 import 'package:flutter_learn/douban/widgets/HYDashLineWidget.dart';
 import 'package:flutter_learn/douban/widgets/HYStarRatingWidget.dart';
+import 'package:stack_trace/stack_trace.dart';
+
+import '../../utils/log.dart';
 
 class HYHomeMovieItem extends StatelessWidget {
   final MovieItem movie;
@@ -56,18 +59,26 @@ class HYHomeMovieItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildContentImage(),
-        SizedBox(
+        const SizedBox(
           width: 8,
         ),
-        buildContentInfo(),
-        SizedBox(
-          width: 8,
-        ),
-        buildContentLine(),
-        SizedBox(
-          width: 8,
-        ),
-        buildContentWish()
+        Expanded(
+            child: IntrinsicHeight(
+              child: Row(
+                children: [
+                  buildContentInfo(),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  buildContentLine(),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  buildContentWish()
+                ],
+              ),
+            )
+        )
       ],
     );
   }
@@ -106,6 +117,8 @@ class HYHomeMovieItem extends StatelessWidget {
   }
 
   Widget buildContentInfoTitle() {
+    HyCustomTrace("这是一条测试信息!", StackTrace.current);
+
     //此处将row改为富文本，是因为要实现文本过长自动换行的功能
     return Text.rich(TextSpan(children: [
       WidgetSpan(
@@ -159,7 +172,7 @@ class HYHomeMovieItem extends StatelessWidget {
       height: 100,
       child: HYDashLine(
         axis: Axis.vertical,
-        dashWidth: .2,
+        dashWidth: .4,
         dashHeight: 6,
         count: 10,
         color: Colors.grey,
